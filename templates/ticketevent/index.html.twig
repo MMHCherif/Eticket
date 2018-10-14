@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ticketevent index{% endblock %}
+
+{% block body %}
+    <h1>Ticketevent index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Stopsaleat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ticketevent in ticketevents %}
+            <tr>
+                <td>{{ ticketevent.id }}</td>
+                <td>{{ ticketevent.name }}</td>
+                <td>{{ ticketevent.price }}</td>
+                <td>{{ ticketevent.quantity }}</td>
+                <td>{{ ticketevent.stopsaleat ? ticketevent.stopsaleat|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('ticketevent_show', {'id': ticketevent.id}) }}">show</a>
+                    <a href="{{ path('ticketevent_edit', {'id': ticketevent.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ticketevent_new') }}">Create new</a>
+{% endblock %}
